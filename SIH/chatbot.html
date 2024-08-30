@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legis-Learners</title>
+<style>
+body {
+font-family: 'Arial', sans-serif;
+background-color: #f0f0f0;
+margin: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+color: #333;
+}
+.chat-container {
+width: 400px;
+background-color: #fff;
+border-radius: 12px;
+box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+overflow: hidden;
+}
+#chatbox {
+height: 300px;
+overflow-y: auto;
+padding: 20px;
+border-bottom: 2px solid #ddd;
+}
+#chatbox p {
+margin: 10px 0;
+font-size: 16px;
+}
+input[type="text"] {
+width: calc(100% - 70px);
+padding: 12px;
+border: none;
+border-radius: 0;
+border-bottom-left-radius: 12px;
+font-size: 14px;
+outline: none;
+color: #333;
+background-color: #f5f5f5;
+}
+button {
+width: 70px;
+padding: 12px 0;
+border: none;
+border-radius: 0;
+border-bottom-right-radius: 12px;
+background-color: #009688;
+color: #fff;
+font-size: 14px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+outline: none;
+}
+button:hover {
+background-color: #85b3ef;
+}
+input[type="text"]:focus,
+button:focus {
+border-color: #3887be;
+}
+::-webkit-scrollbar {
+width: 8px;
+}
+::-webkit-scrollbar-thumb {
+background-color: #ccc;
+border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+background-color: #bbb;
+}
+</style>
+</head>
+<body>
+<div class="chat-container">
+<div id="chatbox">
+<p>Chatbot: Welcome to the chatbot!</p>
+</div>
+<div style="display: flex;">
+<input type="text" id="userInput" placeholder="Type your message here...">
+<button onclick="sendMessage()">Send</button>
+</div>
+</div>
+
+<script>
+// Insert JavaScript code here
+const chatbox = document.getElementById('chatbox');
+const userInput = document.getElementById('userInput');
+// Sample chatbot responses
+const responses = {
+'hi': ['Hello citizens! How can I help you today?', 'Hi there! What can I do for you?'],
+'how are you?': ['I\'m a chatbot, so I\'m doing great! How about you?', 'I\'m good, thank you! What\'s up with you?'],
+'what is your name?': ['My name is Chatbot, but you can call me whatever you like.', 'Some people call me Chatbot, while others might call me by a different name.'],
+'default': ['I\'m not sure how to respond to that. Can you please provide more information?', 'Hmm, I don\'t have a response for that. Can you rephrase your question or provide more details?'],
+'hello': ['Hello! How can I help you today?', 'Hi there! What can I do for you?'],
+'what is constitution': ['A constitution is a set of fundamental rules that determine how a country or state is run.'],
+'how many laws are there in india?': ['In the Indian law system, we have around 1248 laws. All these laws will make the law system of India more effective and extensive. The constitution of India was the longest, with 450 articles, 12 schedules, and 101 amendments.'],
+'What are the three organs of government?': ['The three organs of the government are the executive, the legislature and the judiciary.'],
+'who is the father of our constitution?': ['Dr Bhimrao Ambedkar is known as the father of Indian constitution. '],
+'use of this website?': ['To simplify complex concepts for children, youth and all citizens, fostering better understanding of rights and duties by making interactive and fun games.'],
+'How many laws are there in India?': ['The constitution of India was the longest, with 450 articles, 12 schedules, and 101 amendments.'],
+};
+// Function to get the chatbot's response
+function getResponse(userInput) {
+userInput = userInput.toLowerCase();
+if (responses.hasOwnProperty(userInput)) {
+const response = responses[userInput];
+return response[Math.floor(Math.random() * response.length)];
+} else {
+const response = responses['default'];
+return response[Math.floor(Math.random() * response.length)];
+}
+}
+// Function to send the user's message and receive the chatbot's response
+function sendMessage() {
+const userInput = document.getElementById('userInput');
+const inputText = userInput.value.trim();
+if (inputText.length > 0) {
+const botResponse = getResponse(inputText);
+chatbox.innerHTML += `<p>User: ${inputText}</p>`;
+chatbox.innerHTML += `<p>Chatbot: ${botResponse}</p>`;
+userInput.value = '';
+}
+}
+// Function to handle user input events
+function handleUserInput(event) {
+if (event.key === 'Enter') {
+sendMessage();
+}
+}
+userInput.addEventListener('keydown', handleUserInput);
+</script>
+</body>
+</html>
